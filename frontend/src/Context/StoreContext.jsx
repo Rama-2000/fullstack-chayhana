@@ -1,70 +1,125 @@
+import { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import { createContext,  useEffect,  useState } from "react";
+
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
-  const url = "http://localhost:4000";
   const [token, setToken] = useState("");
-  const [food_list,setFoodList] = useState([]);
+  const [foodList, setFoodList] = useState([]);
+  const url = "http://localhost:4000";
 
+  // Восстановление корзины из localStorage
+  useEffect(() => {
+    const savedCart = JSON.parse(localStorage.getItem("cart")) || {};
+    setCartItems(savedCart);
+  }, []);
+
+  // Сохранение корзины в localStorage при изменении
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  // Восстановление токена из cookies при загрузке страницы
+  useEffect(() => {
+    const fetchToken = async () => {
+      try {
+        const response = await axios.get(`${url}/api/user/check-auth`, {
+          withCredentials: true, // Убедитесь, что куки передаются
+        });
+  
+        if (response.data.success) {
+          setToken(response.data.token); // Восстанавливаем токен
+          console.log("Token restored:", response.data.token);
+        }
+      } catch (error) {
+        console.error("Ошибка при проверке авторизации:", error);
+      }
+    };
+
+    fetchToken();
+  }, []);
+
+  // Добавление товара в корзину
   const addToCart = async (itemId) => {
-    if (!cartItems[itemId]) {
-      setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
-    } else {
-      setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-    }
-    if(token){
-      await axios.post(url + "/api/cart/add", {itemId}, {headers:{token}})
+    const updatedCart = { ...cartItems, [itemId]: (cartItems[itemId] || 0) + 1 };
+    setCartItems(updatedCart);
+  
+    if (token) {
+      try {
+        await axios.post(
+          `${url}/api/cart/add`,
+          { itemId },
+          {
+            headers: { token }, // Передаем токен в заголовке
+            withCredentials: true, // Убедитесь, что куки передаются
+          }
+        );
+      } catch (error) {
+        console.error("Error adding to cart:", error);
+      }
     }
   };
-
+  
   const removeFromCart = async (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-    if(token){
-      await axios.post(url + "/api/cart/remove",{itemId},{headers:{token}})
+    if (cartItems[itemId] > 0) {
+      const updatedCart = { ...cartItems, [itemId]: cartItems[itemId] - 1 };
+      setCartItems(updatedCart);
+  
+      if (token) {
+        try {
+          await axios.post(
+            `${url}/api/cart/remove`,
+            { itemId },
+            {
+              headers: { token }, // Передаем токен в заголовке
+              withCredentials: true, // Убедитесь, что куки передаются
+            }
+          );
+        } catch (error) {
+          console.error("Error removing from cart:", error);
+        }
+      }
     }
   };
 
-  const getTotalCartAmout = () => {
+  // Расчет общей суммы корзины
+  const getTotalCartAmount = () => {
     let totalAmount = 0;
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
-        let itemInfo = food_list.find((product) => product._id === item);
-        totalAmount += itemInfo.price * cartItems[item];
+        const itemInfo = foodList.find((product) => product._id === item);
+        if (itemInfo) {
+          totalAmount += itemInfo.price * cartItems[item];
+        }
       }
     }
     return totalAmount;
   };
 
-  const fetchFoodList = async ()=>{
-    const response = await axios.get(url+"/api/food/list")
-    setFoodList(response.data.data)
-  }
+  // Загрузка списка блюд
+  const fetchFoodList = async () => {
+    try {
+      const response = await axios.get(`${url}/api/food/list`);
+      setFoodList(response.data.data);
+    } catch (error) {
+      console.error("Error fetching food list:", error);
+    }
+  };
 
+  // Загрузка данных при монтировании компонента
+  useEffect(() => {
+    fetchFoodList();
+  }, []);
 
-  const loadCartData = async (token)=>{
-    const response = await axios.post(url + "/api/cart/get",{}, {headers:{token}});
-    setCartItems(response.data.cartData);
-  }
-  useEffect(()=>{
-      async function loadData() {
-        await fetchFoodList()
-        if(localStorage.getItem("token")){
-          setToken(localStorage.getItem("token"));
-          await loadCartData(localStorage.getItem("token"))
-        } 
-      }
-      loadData()
-  },[])
-
+  // Значение контекста
   const contextValue = {
-    food_list,
+    foodList,
     cartItems,
     setCartItems,
     addToCart,
     removeFromCart,
-    getTotalCartAmout,
+    getTotalCartAmount,
     url,
     token,
     setToken,
@@ -77,4 +132,4 @@ const StoreContextProvider = (props) => {
   );
 };
 
-export default StoreContextProvider;
+export default StoreContextProvider

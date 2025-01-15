@@ -1,45 +1,61 @@
-.food-item{
+::-webkit-scrollbar {
+    display: none;
+}
+
+.food-item {
     width: 100%;
-    margin: auto;
     border-radius: 15px;
     box-shadow: 0px 0px 10px #00000015;
     transition: 0.3s;
     animation: fadeIn 1s;
 }
-.food-item-image{
+
+.food-item-image {
     width: 100%;
+    height: 200px;
     border-radius: 15px 15px 0px 0px;
+    object-fit: cover; /* Добавлено для корректного отображения изображений */
 }
-.food-item-info{
-    padding: 20px;
+
+.food-item-info {
+    padding: 20px 20px 10px 20px;
+    display: flex;
+    flex-direction: column;
+    height: 50%;
 }
-.food-item-name-rating{
+
+.food-item-name-rating {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
 }
-.food-item-name-rating p{
+
+.food-item-name-rating p {
     font-size: 20px;
     font-weight: 500;
 }
-.food-item-name-rating img{
-    width: 70px;
-}
-.food-item-desc{
+
+.food-item-desc {
     color: #676767;
     font-size: 12px;
+    height: 75px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
 }
-.food-item-price{
+
+.food-item-price {
     color: tomato;
     font-size: 22px;
     font-weight: 500;
-    margin: 10px 0px;
+    margin: 10px 0px 5px 0;
 }
-.food-item-img-container{
+
+.food-item-img-container {
     position: relative;
 }
-.food-item-img-container .add{
+
+.food-item-img-container .add {
     position: absolute;
     width: 35px;
     bottom: 15px;
@@ -47,7 +63,8 @@
     cursor: pointer;
     border-radius: 50%;
 }
-.food-item-counter{
+
+.food-item-counter {
     position: absolute;
     bottom: 15px;
     right: 15px;
@@ -58,6 +75,105 @@
     border-radius: 50px;
     background-color: white;
 }
-.food-item-counter img{
+
+.food-item-counter img {
     width: 30px;
+}
+
+/* Адаптивность для устройств с шириной экрана до 1050px */
+@media (max-width: 1050px) {
+    .food-item-image {
+        height: 180px;
+    }
+
+    .food-item-name-rating p {
+        font-size: 18px;
+    }
+
+    .food-item-price {
+        font-size: 20px;
+    }
+
+    .food-item-desc {
+        font-size: 11px;
+    }
+}
+
+/* Адаптивность для устройств с шириной экрана до 750px */
+@media (max-width: 750px) {
+    .food-item-image {
+        height: 150px;
+    }
+
+    .food-item-name-rating p {
+        font-size: 16px;
+    }
+
+    .food-item-price {
+        font-size: 18px;
+    }
+
+    .food-item-desc {
+        font-size: 10px;
+    }
+
+    .food-item-info {
+        padding: 15px;
+    }
+}
+
+/* Адаптивность для устройств с шириной экрана до 600px */
+@media (max-width: 600px) {
+    .food-item-image {
+        height: 120px;
+    }
+
+    .food-item-name-rating p {
+        font-size: 14px;
+    }
+
+    .food-item-price {
+        font-size: 16px;
+    }
+
+    .food-item-desc {
+        font-size: 9px;
+    }
+
+    .food-item-info {
+        padding: 10px;
+    }
+
+    .food-item-img-container .add,
+    .food-item-counter img {
+        width: 25px;
+    }
+}
+
+/* Адаптивность для устройств с шириной экрана до 400px */
+@media (max-width: 400px) {
+    .food-item-image {
+        height: 100px;
+    }
+
+    .food-item-name-rating p {
+        font-size: 12px;
+    }
+
+    .food-item-price {
+        font-size: 14px;
+    }
+
+    .food-item-desc {
+        font-size: 8px;
+    }
+
+    .food-item-info {
+        padding: 8px;
+    }
+
+    .food-item-img-container .add,
+    .food-item-counter img {
+        width: 20px;
+    }
 }

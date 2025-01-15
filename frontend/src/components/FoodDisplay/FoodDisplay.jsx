@@ -4,14 +4,18 @@ import { StoreContext } from "../../Context/StoreContext";
 import FoodItem from "../FoodItem/FoodItem";
 
 const FoodDisplay = ({ category }) => {
-  const { food_list } = useContext(StoreContext);
+  const { foodList } = useContext(StoreContext);
+
+  if (!foodList || foodList.length === 0) {
+    return <div>Блюда не загружены</div>;
+  }
 
   return (
     <div className="food-display" id="food-display">
-      <h2>Top dishes near you</h2>
+      <h2>{category || "Все категории"}</h2>
       <div className="food-display-list">
-        {food_list.map((item, index) => {
-          if (category == "All" || category === item.category) {
+        {foodList.map((item, index) => {
+          if (!category || category === item.category) {
             return (
               <FoodItem
                 key={index}
@@ -23,6 +27,7 @@ const FoodDisplay = ({ category }) => {
               />
             );
           }
+          return null;
         })}
       </div>
     </div>

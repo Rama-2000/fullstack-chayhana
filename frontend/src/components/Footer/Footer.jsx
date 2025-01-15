@@ -5,7 +5,7 @@ function Footer() {
     <div className="footer" id="footer">
       <div className="footer-content">
         <div className="footer-content-left">
-            <img src={assets.logo} alt="" />
+            {/* <img src={assets.logo} alt="" /> */}
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit iusto culpa cum deserunt exercitationem quasi.</p>
             <div className="footer-social-icons">
                 <img src={assets.facebook_icon} alt="" />

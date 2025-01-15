@@ -1,0 +1,129 @@
+.completed-orders {
+    width: 70%;
+    margin-left: max(5vw, 25px);
+    margin-top: 50px;
+    color: #6d6d6d;
+    font-size: 16px;
+}
+
+.completed-orders h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.completed-order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.completed-order-item {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr;
+    align-items: start;
+    gap: 30px;
+    border: 1px solid #4CAF50; /* Зеленый цвет для выполненных заказов */
+    padding: 20px;
+    margin: 30px 0;
+    font-size: 14px;
+    color: #505050;
+    background-color: #f9f9f9; /* Светлый фон для выделения */
+    border-radius: 8px; /* Закругленные углы */
+}
+
+.completed-order-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%; /* Круглое изображение */
+}
+
+.completed-order-item-food {
+    font-weight: 600;
+    color: #333;
+}
+
+.completed-order-item-name {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #333;
+}
+
+.completed-order-item-address {
+    margin-bottom: 10px;
+    color: #666;
+}
+
+.completed-order-item-phone {
+    color: #666;
+}
+
+.completed-order-item-payment {
+    color: #666;
+}
+
+.completed-status {
+    font-weight: 600;
+    color: #4CAF50; /* Зеленый цвет для статуса "Выполнено" */
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 900px) {
+    .completed-orders {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .completed-order-item {
+        grid-template-columns: 1fr 2fr 1fr;
+        gap: 15px;
+        padding: 15px;
+        font-size: 12px;
+    }
+
+    .completed-order-item img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .completed-order-item-food,
+    .completed-order-item-name,
+    .completed-order-item-address,
+    .completed-order-item-phone,
+    .completed-order-item-payment {
+        font-size: 12px;
+    }
+
+    .completed-status {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    .completed-order-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .completed-order-item img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .completed-order-item-food,
+    .completed-order-item-name,
+    .completed-order-item-address,
+    .completed-order-item-phone,
+    .completed-order-item-payment {
+        font-size: 10px;
+    }
+
+    .completed-status {
+        font-size: 10px;
+    }
+}

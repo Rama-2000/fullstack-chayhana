@@ -8,7 +8,7 @@
 .add form{
     gap: 20px;
 }
-.add-img-upload img{
+.add-image-upload img{
     width: 120px;
 }
 .add-product-name, .add-product-description{
@@ -33,4 +33,7 @@ width: max(40%,280px);
     color: white;
     cursor: pointer;
     text-transform: uppercase;
+}
+.add-img-upload .image img{
+    width: 200px;
 }

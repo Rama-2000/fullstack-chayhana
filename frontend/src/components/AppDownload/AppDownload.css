@@ -1,22 +1,97 @@
-.app-download{
+.app-download {
     margin: auto auto;
     margin-top: 100px;
     font-size: max(3vw, 20px);
     text-align: center;
     font-weight: 500;
+    padding: 20px;
 }
-.app-download-platforms{
+
+.app-download p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.app-download-platforms {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: max(2vw, 10px);
     margin-top: 40px;
+    flex-wrap: wrap; /* Добавлено для адаптивности */
 }
-.app-download-platforms img{
+
+.app-download-platforms img {
     cursor: pointer;
     width: max(30vw, 120px);
     max-width: 180px;
     transition: 0.5s;
 }
-.app-download-platforms img:hover{
+
+.app-download-platforms img:hover {
     transform: scale(1.05);
+}
+
+/* Адаптивность для устройств с шириной экрана до 1050px */
+@media (max-width: 1050px) {
+    .app-download {
+        margin-top: 80px;
+        font-size: max(2.5vw, 18px);
+    }
+
+    .app-download-platforms {
+        gap: max(1.5vw, 8px);
+    }
+
+    .app-download-platforms img {
+        width: max(25vw, 100px);
+    }
+}
+
+/* Адаптивность для устройств с шириной экрана до 750px */
+@media (max-width: 750px) {
+    .app-download {
+        margin-top: 60px;
+        font-size: max(2vw, 16px);
+    }
+
+    .app-download-platforms {
+        gap: max(1vw, 6px);
+    }
+
+    .app-download-platforms img {
+        width: max(20vw, 80px);
+    }
+}
+
+/* Адаптивность для устройств с шириной экрана до 500px */
+@media (max-width: 500px) {
+    .app-download {
+        margin-top: 40px;
+        font-size: max(1.5vw, 14px);
+    }
+
+    .app-download-platforms {
+        gap: max(0.8vw, 4px);
+    }
+
+    .app-download-platforms img {
+        width: max(15vw, 60px);
+    }
+}
+
+/* Адаптивность для устройств с шириной экрана до 400px */
+@media (max-width: 400px) {
+    .app-download {
+        margin-top: 30px;
+        font-size: max(1.2vw, 12px);
+    }
+
+    .app-download-platforms {
+        gap: max(0.5vw, 3px);
+    }
+
+    .app-download-platforms img {
+        width: max(12vw, 50px);
+    }
 }

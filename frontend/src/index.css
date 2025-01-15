@@ -20,7 +20,11 @@ li{
   width: 80%;
   margin: auto;
 }
-
+@media(max-width:600px){
+  .app{
+    width: 90%;
+  }
+}
 @keyframes fadeIn{
   0%{
     opacity: 0;

@@ -10,6 +10,8 @@ import menu_5 from './menu_5.png'
 import menu_6 from './menu_6.png'
 import menu_7 from './menu_7.png'
 import menu_8 from './menu_8.png'
+import phoneIcon from './phone-solid.svg'
+
 
 import food_1 from './food_1.png'
 import food_2 from './food_2.png'
@@ -79,42 +81,48 @@ export const assets = {
     profile_icon,
     logout_icon,
     bag_icon,
-    parcel_icon
+    parcel_icon,
+    phoneIcon
 }
 
 export const menu_list = [
     {
-        menu_name: "Salad",
+        menu_name: "Салаты",
         menu_image: menu_1
     },
     {
-        menu_name: "Rolls",
+        menu_name: "Горячие закуски",
         menu_image: menu_2
     },
     {
-        menu_name: "Deserts",
+        menu_name: "Дисерты",
         menu_image: menu_3
     },
     {
-        menu_name: "Sandwich",
+        menu_name: "Супы",
         menu_image: menu_4
     },
     {
-        menu_name: "Cake",
+        menu_name: "Мангал",
         menu_image: menu_5
     },
     {
-        menu_name: "Pure Veg",
+        menu_name: "Японская Кухня",
         menu_image: menu_6
     },
     {
-        menu_name: "Pasta",
-        menu_image: menu_7
+        menu_name: "Фаст Фуд",
+        menu_image: menu_8
     },
     {
-        menu_name: "Noodles",
+        menu_name: "Напитки",
         menu_image: menu_8
-    }]
+    },
+    {
+        menu_name: "Гарньеры",
+        menu_image: menu_8
+    }
+]
 
 export const food_list = [
     {

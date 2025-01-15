@@ -2,44 +2,53 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    padding: 20px;
 }
 
 .explore-menu h1 {
     color: #262626;
     font-weight: 500;
+    font-size: max(2.5vw, 24px);
+    text-align: center;
 }
 
 .explore-menu-text {
     max-width: 60%;
     color: #808080;
+    font-size: max(1vw, 14px);
+    text-align: center;
+    margin: 0 auto;
 }
 
 .explore-menu-list {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
     text-align: center;
     margin: 20px 0px;
-    overflow-x: scroll;
+    overflow-x: auto;
+    scrollbar-width: none; /* Для Firefox */
 }
 
 .explore-menu-list::-webkit-scrollbar {
-    display: none;
+    display: none; /* Для Chrome, Safari и Edge */
 }
 
 .explore-menu-list-item {
-    width: 7.5vw;
-    min-width: 80px;
+    min-width: 100px;
     cursor: pointer;
     border-radius: 50%;
     transition: 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .explore-menu-list-item p {
     margin-top: 10px;
     color: #747474;
-    font-size: max(1.2vw, 16px);
+    font-size: max(1.2vw, 14px);
     cursor: pointer;
 }
 
@@ -51,21 +60,92 @@
 }
 
 .explore-menu-list-item .active {
-    border: 4px solid tomato;
-    width: 110%;
-    border-radius: 50%;
-    padding: 2px; 
+    border: 1px solid tomato;
+    background-color: rgb(195, 255, 0);
+    padding: 2px;
     box-sizing: border-box;
+    border-radius: 10px;
 }
-@media(max-width:1050px){
-    .explore-menu-list-item{
-        min-width: 20%;
+
+/* Адаптивность для устройств с шириной экрана до 1050px */
+@media (max-width: 1050px) {
+    .explore-menu-list-item {
+        min-width: 80px;
     }
-    .explore-menu-text{
-        max-width: 100%;
+
+    .explore-menu-text {
+        max-width: 80%;
         font-size: 14px;
     }
-    .explore-menu-list-item .active{
+
+    .explore-menu-list-item .active {
         width: 90%;
+    }
+}
+
+/* Адаптивность для устройств с шириной экрана до 750px */
+@media (max-width: 750px) {
+    .explore-menu h1 {
+        font-size: max(3vw, 20px);
+    }
+
+    .explore-menu-text {
+        max-width: 90%;
+        font-size: 12px;
+    }
+
+    .explore-menu-list {
+        gap: 15px;
+    }
+
+    .explore-menu-list-item {
+        min-width: 70px;
+    }
+
+    .explore-menu-list-item p {
+        font-size: max(1.5vw, 12px);
+    }
+}
+
+/* Адаптивность для устройств с шириной экрана до 500px */
+@media (max-width: 500px) {
+    .explore-menu h1 {
+        font-size: max(4vw, 18px);
+    }
+
+    .explore-menu-text {
+        max-width: 100%;
+        font-size: 11px;
+    }
+
+    .explore-menu-list {
+        gap: 10px;
+    }
+
+    .explore-menu-list-item {
+        min-width: 60px;
+    }
+
+    .explore-menu-list-item p {
+        font-size: max(2vw, 10px);
+    }
+}
+
+/* Адаптивность для устройств с шириной экрана до 400px */
+@media (max-width: 400px) {
+    .explore-menu h1 {
+        font-size: max(5vw, 16px);
+    }
+
+    .explore-menu-list {
+        gap: 5px;
+    }
+
+    .explore-menu-list-item {
+        min-width: 50px;
+    }
+
+    .explore-menu-list-item p {
+        font-size: max(2.5vw, 10px);
     }
 }

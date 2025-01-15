@@ -1,0 +1,114 @@
+.my-orders {
+    margin: 50px 0;
+    padding: 20px;
+}
+
+.my-orders h2 {
+    font-size: max(2vw, 24px);
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.my-orders .container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.my-orders-order {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 1fr 2fr 1fr;
+    align-items: center;
+    gap: 20px;
+    font-size: 14px;
+    padding: 15px 20px;
+    color: #454545;
+    border: 1px solid tomato;
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease;
+}
+
+.my-orders-order:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.my-orders-order img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.my-orders-order p span {
+    color: tomato;
+}
+
+.my-orders-order p b {
+    font-weight: 500;
+    color: #454545;
+}
+
+.my-orders-order button {
+    border: none;
+    padding: 12px 0;
+    border-radius: 4px;
+    background-color: #ffe1e1;
+    cursor: pointer;
+    color: #454545;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.my-orders-order button:hover {
+    background-color: #ffcccc;
+}
+
+/* Адаптивность для устройств с шириной экрана до 1050px */
+@media (max-width: 1050px) {
+    .my-orders-order {
+        grid-template-columns: 0.5fr 2fr 1fr 1fr;
+        font-size: 13px;
+    }
+
+    .my-orders-order button {
+        font-size: 12px;
+    }
+}
+
+/* Адаптивность для устройств с шириной экрана до 900px */
+@media (max-width: 900px) {
+    .my-orders-order {
+        grid-template-columns: 1fr 2fr 1fr;
+        row-gap: 10px;
+        font-size: 12px;
+    }
+
+    .my-orders-order button {
+        font-size: 11px;
+    }
+}
+
+/* Адаптивность для устройств с шириной экрана до 600px */
+@media (max-width: 600px) {
+    .my-orders-order {
+        grid-template-columns: 1fr 2fr;
+        font-size: 11px;
+    }
+
+    .my-orders-order button {
+        font-size: 10px;
+    }
+}
+
+/* Адаптивность для устройств с шириной экрана до 400px */
+@media (max-width: 400px) {
+    .my-orders-order {
+        grid-template-columns: 1fr;
+        font-size: 10px;
+    }
+
+    .my-orders-order button {
+        font-size: 9px;
+    }
+}

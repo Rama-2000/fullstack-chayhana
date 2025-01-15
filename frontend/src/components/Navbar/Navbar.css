@@ -1,27 +1,54 @@
-
-.navbar{
+.navbar {
     padding: 20px 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-.navbar .logo{
-    width: 150px;
-}
-.navbar-menu{
+    flex-wrap: wrap; /* Добавлено для адаптивности */
+  }
+  
+  .logo-main {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .navbar .logo {
+    width: 50px;
+    border-radius: 50px;
+  }
+  
+  .navbar-menu {
     display: flex;
     list-style: none;
     gap: 20px;
     color: #49557e;
     font-size: 18px;
     text-transform: capitalize;
-}
-.navbar-right{
+  }
+  
+  .navbar-right {
     display: flex;
     gap: 40px;
     align-items: center;
-}
-.navbar button{
+  }
+  
+  .btn-choose {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .phone-number {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .phone-number img {
+    width: 15px;
+  }
+  
+  .navbar button {
     background: transparent;
     font-size: 16px;
     color: #49557e;
@@ -30,97 +57,157 @@
     border-radius: 50px;
     cursor: pointer;
     transition: 0.3s;
-}
-.navbar button:hover{
+  }
+  
+  .navbar button:hover {
     background-color: #fff4f2;
-}
-.navbar .active{
+  }
+  
+  .navbar .active {
     padding-bottom: 2px;
     border-bottom: 2px solid #49557e;
-}
-.navbar-search-icon{
+  }
+  
+  .navbar-search-icon {
     position: relative;
-}
-.navbar-search-icon .dot{
+  }
+  
+  .navbar-search-icon .dot {
     position: absolute;
-    min-width:10px;
+    min-width: 10px;
     min-height: 10px;
     background-color: tomato;
     border-radius: 5px;
     top: -8px;
     right: -8px;
-}
-.navbar-profile{
+  }
+  
+  .navbar-profile {
     position: relative;
-}
-.nav-profile-dropdown{
+  }
+  
+  .nav-profile-dropdown {
     position: absolute;
     display: none;
     right: 0;
     z-index: 1;
-}
-.navbar-profile:hover .nav-profile-dropdown{
+  }
+  
+  .navbar-profile:hover .nav-profile-dropdown {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background-color:#fff2ef;
+    background-color: #fff2ef;
     padding: 12px 25px;
-    border-radius:4px;
+    border-radius: 4px;
     border: 1px solid tomato;
     outline: 2px solid white;
-    list-style: none; 
-}
-.nav-profile-dropdown li{
+    list-style: none;
+  }
+  
+  .nav-profile-dropdown li {
     display: flex;
-    align-items:center;
+    align-items: center;
     gap: 10px;
     cursor: pointer;
-}
-.nav-profile-dropdown img{
+  }
+  
+  .nav-profile-dropdown img {
     width: 20px;
-}
-.nav-profile-dropdown li:hover{
+  }
+  
+  .nav-profile-dropdown li:hover {
     color: tomato;
-}
-@media(max-width:1050px){
-    .navbar .logo{
-        width: 140px;
+  }
+  
+  /* Адаптивность для устройств с шириной экрана до 1050px */
+  @media (max-width: 1050px) {
+    .navbar-menu {
+      gap: 20px;
+      font-size: 17px;
     }
-    .navbar-menu{
-        gap: 20px;
-        font-size: 17px;
+  
+    .navbar-right {
+      gap: 30px;
     }
-    .navbar-right{
-        gap: 30px;
+  
+    .navbar-right img {
+      width: 22px;
     }
-    .navbar-right img{
-        width: 22px;
+  
+    .navbar-right button {
+      padding: 8px 25px;
     }
-    .navbar-right button{
-        padding: 8px 25px;
+  }
+  
+  /* Адаптивность для устройств с шириной экрана до 900px */
+  @media (max-width: 900px) {
+    .navbar-menu {
+      gap: 15px;
+      font-size: 16px;
     }
-}
-@media(max-width:900px){
-    .navbar .logo{
-        width: 120px;
+  
+    .navbar-right {
+      gap: 20px;
     }
-    .navbar-menu{
-        gap: 15px;
-        font-size: 16px;
+  
+    .navbar-right img {
+      width: 20px;
     }
-    .navbar-right{
-        gap: 20px;
+  
+    .navbar-right button {
+      padding: 7px 20px;
+      font-size: 15px;
     }
-    .navbar-right img{
-        width: 20px;
+  }
+  
+  /* Адаптивность для устройств с шириной экрана до 750px */
+  @media (max-width: 750px) {
+    .navbar {
+      padding: 10px 0px;
+      align-items: center; /* Выравнивание по левому краю */
     }
-    .navbar-right button{
-        padding: 7px 20px;
-        font-size: 15px;
+  
+    .navbar-menu {
+      display: none; /* Скрыть меню на мобильных устройствах */
     }
-}
-@media(max-width:750px){
-    .navbar-menu{
-        display: none;
+  
+    .logo-main h3 {
+      display: none; /* Скрыть текст лого на мобильных устройствах */
     }
-}
+  
+    .phone-number a:last-child {
+      display: none; /* Скрыть номер телефона на мобильных устройствах */
+    }
+  
+    .navbar-right {
+      width: 40%; /* Растянуть на всю ширину */
+      justify-content: space-between; /* Равномерное распределение */
+      gap: 10px; /* Уменьшение отступов */
+    }
+  
+    .navbar button {
+      padding: 5px 15px; /* Уменьшение размера кнопки */
+      font-size: 14px; /* Уменьшение шрифта */
+    }
+  }
+  
+  /* Адаптивность для устройств с шириной экрана до 500px */
+  @media (max-width: 500px) {
+    .navbar {
+      padding: 10px 5px; /* Уменьшение отступов */
+    }
+  
+    .navbar-right {
+      gap: 5px; /* Минимальные отступы */
+    }
+  
+    .phone-number img {
+      width: 20px; /* Уменьшение иконки телефона */
+    }
+  
+    .navbar button {
+      padding: 5px 10px; /* Минимальный размер кнопки */
+      font-size: 12px; /* Минимальный шрифт */
+    }
+  }

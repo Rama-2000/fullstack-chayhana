@@ -1,11 +1,12 @@
-.header{
+.header {
     height: 34vw;
     margin: 30px auto;
     background: url('/header_img.png') no-repeat;
     background-size: contain;
     position: relative;
 }
-.header-contents{
+
+.header-contents {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -16,38 +17,119 @@
     left: 6vw;
     animation: fadeIn 3s;
 }
-.header-contents h2{
+
+.header-contents h2 {
     font-weight: 500;
     color: white;
     font-size: max(4.5vw, 22px);
 }
-.header-contents p{
+
+.header-contents p {
     color: white;
     font-size: 1vw;
 }
-.header-contents button{
+
+.header-contents button {
     border: none;
     color: #747474;
     font-weight: 500;
     padding: 1vw 2.3vw;
     background-color: white;
-    font-size: max(1vw,13px);
+    font-size: max(1vw, 13px);
     border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-@media(max-width:1050px){
-    .header-contents{
-        max-width: 45px;
+.header-contents button:hover {
+    background-color: #f0f0f0;
+}
+
+/* Адаптивность для устройств с шириной экрана до 1050px */
+@media (max-width: 1050px) {
+    /* .header {
+        height: 38vw;
+    } */
+
+    .header-contents {
+        max-width: 55%;
+    }
+
+    .header-contents h2 {
+        font-size: max(4vw, 20px);
+    }
+
+    .header-contents button {
+        padding: 1.5vw 3vw;
+        font-size: max(1.2vw, 12px);
     }
 }
-@media(max-width:750px){
-    .header-contents{
+
+/* Адаптивность для устройств с шириной экрана до 750px */
+@media (max-width: 750px) {
+    .header {
+        height: 45vw;
+        background-size: cover;
+        margin: 15px auto;
+    }
+
+    .header-contents {
         max-width: 65%;
+        bottom: 15%;
     }
-    .header-contents p{
-        display:none;
+
+    .header-contents h2 {
+        font-size: max(3.5vw, 18px);
     }
-    .header-contents button{
+
+    .header-contents p {
+        display: none; /* Скрыть текст на маленьких экранах */
+    }
+
+    .header-contents button {
         padding: 2vw 4vw;
+        font-size: max(1.5vw, 14px);
+    }
+}
+
+/* Адаптивность для устройств с шириной экрана до 500px */
+@media (max-width: 500px) {
+    .header {
+        height: 50vw;
+    }
+
+    .header-contents {
+        max-width: 75%;
+        bottom: 20%;
+    }
+
+    .header-contents h2 {
+        font-size: max(3vw, 16px);
+    }
+
+    .header-contents button {
+        padding: 2.5vw 5vw;
+        font-size: max(2vw, 12px);
+    }
+}
+
+/* Адаптивность для устройств с шириной экрана до 400px */
+@media (max-width: 400px) {
+    .header {
+        height: 60vw;
+    }
+
+    .header-contents {
+        max-width: 85%;
+        bottom: 25%;
+    }
+
+    .header-contents h2 {
+        font-size: max(2.5vw, 14px);
+    }
+
+    .header-contents button {
+        padding: 3vw 6vw;
+        font-size: max(2.5vw, 12px);
     }
 }

@@ -1,50 +1,82 @@
 import userModel from "../models/userModel.js";
+import jwt from "jsonwebtoken";
 
-// Add items to user cart
-
+// Добавление товара в корзину
 const addToCart = async (req, res) => {
   try {
-    let userData = await userModel.findById(req.body.userId);
-    let cartData = await userData.cartData;
-    if (!cartData[req.body.itemId]) {
-      cartData[req.body.itemId] = 1;
-    } else {
-      cartData[req.body.itemId] += 1;
+    const token = req.headers.token; // Получаем токен из заголовка
+    if (!token) {
+      return res.status(401).json({ error: "Доступ запрещен" });
     }
-    await userModel.findByIdAndUpdate(req.body.userId, { cartData });
-    res.json({ succes: true, message: "Added to cart" });
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await userModel.findById(decoded.id);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    const { itemId } = req.body;
+    let cartData = user.cartData || {};
+    if (!cartData[itemId]) {
+      cartData[itemId] = 1;
+    } else {
+      cartData[itemId] += 1;
+    }
+
+    await userModel.findByIdAndUpdate(decoded.id, { cartData });
+    res.json({ success: true, message: "Added to cart" });
   } catch (error) {
     console.log(error);
-    res.json({ succes: false, message: "Error" });
+    res.status(500).json({ success: false, message: "Error" });
   }
 };
 
-//Remove items from userCart
 const removeFromCart = async (req, res) => {
   try {
-    let userData = await userModel.findById(req.body.userId);
-    let cartData = await userData.cartData;
-    if (cartData[req.body.itemId] > 0) {
-      cartData[req.body.itemId] -= 1;
+    const token = req.headers.token; // Получаем токен из заголовка
+    if (!token) {
+      return res.status(401).json({ error: "Доступ запрещен" });
     }
-    await userModel.findByIdAndUpdate(req.body.userId, { cartData });
-    res.json({ succes: true, message: "Removed from card" });
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await userModel.findById(decoded.id);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    const { itemId } = req.body;
+    let cartData = user.cartData || {};
+    if (cartData[itemId] > 0) {
+      cartData[itemId] -= 1;
+    }
+
+    await userModel.findByIdAndUpdate(decoded.id, { cartData });
+    res.json({ success: true, message: "Removed from cart" });
   } catch (error) {
     console.log(error);
-    res.json({ succes: false, message: "Error" });
+    res.status(500).json({ success: false, message: "Error" });
   }
 };
 
-//fetch user cart data
 
+// Получение корзины
 const getCart = async (req, res) => {
   try {
-    let userData = await userModel.findById(req.body.userId);
-    let cartData = await userData.cartData;
-    res.json({ succes: true, cartData });
+    const token = req.headers.token;
+    if (!token) {
+      return res.status(401).json({ error: "Доступ запрещен" });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await userModel.findById(decoded.id);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    res.json({ success: true, cartData: user.cartData || {} });
   } catch (error) {
     console.log(error);
-    res.json({succes:false,message:"Error"})
+    res.status(500).json({ success: false, message: "Error" });
   }
 };
 
