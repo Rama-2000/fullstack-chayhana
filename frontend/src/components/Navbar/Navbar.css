@@ -1,213 +1,167 @@
 .navbar {
-    padding: 20px 0px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap; /* Добавлено для адаптивности */
+  padding: 20px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  box-shadow: var(--shadow-light);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark .navbar {
+  background-color: var(--background-dark);
+  box-shadow: var(--shadow-dark);
+}
+
+.logo-main {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navbar .logo {
+  width: 50px;
+  border-radius: 50%;
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+  color: var(--text-light);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+body.dark .navbar-menu {
+  color: var(--text-dark);
+}
+
+.navbar-right {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.phone-number {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-light);
+}
+
+body.dark .phone-number {
+  color: var(--text-dark);
+}
+
+.phone-number img {
+  width: 20px;
+}
+
+.phone-number .phone-text {
+  display: inline; /* По умолчанию текст виден */
+}
+
+.navbar button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.navbar button:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+.navbar-search-icon {
+  position: relative;
+}
+
+.navbar-search-icon .dot {
+  position: absolute;
+  min-width: 10px;
+  min-height: 10px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  top: -5px;
+  right: -5px;
+}
+
+.navbar-profile {
+  position: relative;
+}
+
+.nav-profile-dropdown {
+  position: absolute;
+  display: none;
+  right: 0;
+  top: 40px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: var(--shadow-light);
+  padding: 10px;
+  z-index: 1000;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body.dark .nav-profile-dropdown {
+  background-color: var(--background-dark);
+  box-shadow: var(--shadow-dark);
+}
+
+.navbar-profile:hover .nav-profile-dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-profile-dropdown li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-profile-dropdown li:hover {
+  background-color: #f3f4f6;
+}
+
+body.dark .nav-profile-dropdown li:hover {
+  background-color: #374151;
+}
+
+.nav-profile-dropdown img {
+  width: 20px;
+}
+.phone-number img {
+  width: 20px;
+  transition: transform 0.2s ease;
+}
+
+.phone-number img:hover {
+  transform: scale(1.2); /* Увеличиваем иконку при наведении */
+}
+/* Скрыть номер телефона на мобильных устройствах */
+@media (max-width: 768px) {
+  .navbar{
+    padding: 20px;
   }
-  
-  .logo-main {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  .phone-number .phone-text {
+    display: none; /* Скрываем текст номера телефона */
   }
-  
-  .navbar .logo {
-    width: 50px;
-    border-radius: 50px;
+  .logo-main h3{
+    font-size: 14px;
   }
-  
-  .navbar-menu {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-    color: #49557e;
-    font-size: 18px;
-    text-transform: capitalize;
-  }
-  
-  .navbar-right {
-    display: flex;
-    gap: 40px;
-    align-items: center;
-  }
-  
-  .btn-choose {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  
-  .phone-number {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
   .phone-number img {
-    width: 15px;
+    width: 24px; /* Увеличиваем иконку для лучшей видимости */
   }
-  
-  .navbar button {
-    background: transparent;
-    font-size: 16px;
-    color: #49557e;
-    border: 1px solid tomato;
-    padding: 10px 30px;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .navbar button:hover {
-    background-color: #fff4f2;
-  }
-  
-  .navbar .active {
-    padding-bottom: 2px;
-    border-bottom: 2px solid #49557e;
-  }
-  
-  .navbar-search-icon {
-    position: relative;
-  }
-  
-  .navbar-search-icon .dot {
-    position: absolute;
-    min-width: 10px;
-    min-height: 10px;
-    background-color: tomato;
-    border-radius: 5px;
-    top: -8px;
-    right: -8px;
-  }
-  
-  .navbar-profile {
-    position: relative;
-  }
-  
-  .nav-profile-dropdown {
-    position: absolute;
-    display: none;
-    right: 0;
-    z-index: 1;
-  }
-  
-  .navbar-profile:hover .nav-profile-dropdown {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background-color: #fff2ef;
-    padding: 12px 25px;
-    border-radius: 4px;
-    border: 1px solid tomato;
-    outline: 2px solid white;
-    list-style: none;
-  }
-  
-  .nav-profile-dropdown li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-  }
-  
-  .nav-profile-dropdown img {
-    width: 20px;
-  }
-  
-  .nav-profile-dropdown li:hover {
-    color: tomato;
-  }
-  
-  /* Адаптивность для устройств с шириной экрана до 1050px */
-  @media (max-width: 1050px) {
-    .navbar-menu {
-      gap: 20px;
-      font-size: 17px;
-    }
-  
-    .navbar-right {
-      gap: 30px;
-    }
-  
-    .navbar-right img {
-      width: 22px;
-    }
-  
-    .navbar-right button {
-      padding: 8px 25px;
-    }
-  }
-  
-  /* Адаптивность для устройств с шириной экрана до 900px */
-  @media (max-width: 900px) {
-    .navbar-menu {
-      gap: 15px;
-      font-size: 16px;
-    }
-  
-    .navbar-right {
-      gap: 20px;
-    }
-  
-    .navbar-right img {
-      width: 20px;
-    }
-  
-    .navbar-right button {
-      padding: 7px 20px;
-      font-size: 15px;
-    }
-  }
-  
-  /* Адаптивность для устройств с шириной экрана до 750px */
-  @media (max-width: 750px) {
-    .navbar {
-      padding: 10px 0px;
-      align-items: center; /* Выравнивание по левому краю */
-    }
-  
-    .navbar-menu {
-      display: none; /* Скрыть меню на мобильных устройствах */
-    }
-  
-    .logo-main h3 {
-      display: none; /* Скрыть текст лого на мобильных устройствах */
-    }
-  
-    .phone-number a:last-child {
-      display: none; /* Скрыть номер телефона на мобильных устройствах */
-    }
-  
-    .navbar-right {
-      width: 40%; /* Растянуть на всю ширину */
-      justify-content: space-between; /* Равномерное распределение */
-      gap: 10px; /* Уменьшение отступов */
-    }
-  
-    .navbar button {
-      padding: 5px 15px; /* Уменьшение размера кнопки */
-      font-size: 14px; /* Уменьшение шрифта */
-    }
-  }
-  
-  /* Адаптивность для устройств с шириной экрана до 500px */
-  @media (max-width: 500px) {
-    .navbar {
-      padding: 10px 5px; /* Уменьшение отступов */
-    }
-  
-    .navbar-right {
-      gap: 5px; /* Минимальные отступы */
-    }
-  
-    .phone-number img {
-      width: 20px; /* Уменьшение иконки телефона */
-    }
-  
-    .navbar button {
-      padding: 5px 10px; /* Минимальный размер кнопки */
-      font-size: 12px; /* Минимальный шрифт */
-    }
-  }
+}

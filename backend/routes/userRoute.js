@@ -6,7 +6,7 @@ const userRouter = express.Router();
 userRouter.post("/login", loginUser);
 userRouter.post("/register", registerUser);
 userRouter.post("/send-code", sendCode);
-userRouter.get("/check-auth", checkAuth);
+userRouter.get("/check-auth", checkAuth); // Маршрут для проверки авторизации
 userRouter.post("/logout", logoutUser); // Новый маршрут для выхода
 
 export default userRouter;

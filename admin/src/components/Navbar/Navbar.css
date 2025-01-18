@@ -1,12 +1,48 @@
-.navbar{
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 4%;
-}
-.navbar .logo{
-    width: max(10%, 80px);
-}
-.navbar .profile{
+    padding: 12px 5%;
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .nav-logo{
+    display: flex;
+    align-items:center;
+    gap: 10px;
+  }
+  .nav-logo img.logo{
+    width: 50px;
+    border-radius:50%;
+  }
+  .navbar .logo {
+    width: max(10%, 100px);
+    cursor: pointer;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .theme-toggle {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+  }
+  
+  .navbar .profile {
     width: 40px;
-}
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .navbar .profile:hover {
+    transform: scale(1.1);
+  }

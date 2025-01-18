@@ -1,135 +1,109 @@
 .header {
-    height: 34vw;
-    margin: 30px auto;
-    background: url('/header_img.png') no-repeat;
-    background-size: contain;
+    height: 50vh; /* Уменьшил высоту */
+    margin: 20px auto;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url('/header_img.png') no-repeat center center/cover;
     position: relative;
-}
-
-.header-contents {
+    border-radius: 16px;
+    overflow: hidden;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .header-contents {
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: start;
-    gap: 1.5vw;
+    gap: 10px; /* Уменьшил отступы */
     max-width: 50%;
     bottom: 10%;
     left: 6vw;
-    animation: fadeIn 3s;
-}
-
-.header-contents h2 {
-    font-weight: 500;
+    animation: slideIn 1.5s ease-in-out;
+  }
+  
+  .header-contents h2 {
+    font-weight: 600;
     color: white;
-    font-size: max(4.5vw, 22px);
-}
-
-.header-contents p {
+    font-size: 2rem; /* Уменьшил размер шрифта */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .header-contents p {
     color: white;
-    font-size: 1vw;
-}
-
-.header-contents button {
+    font-size: 1rem; /* Уменьшил размер шрифта */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .header-contents button {
+    background-color: var(--primary-color);
+    color: white;
     border: none;
-    color: #747474;
-    font-weight: 500;
-    padding: 1vw 2.3vw;
-    background-color: white;
-    font-size: max(1vw, 13px);
-    border-radius: 50px;
+    padding: 10px 20px; /* Уменьшил padding */
+    border-radius: 8px;
+    font-size: 0.9rem; /* Уменьшил размер шрифта */
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.header-contents button:hover {
-    background-color: #f0f0f0;
-}
-
-/* Адаптивность для устройств с шириной экрана до 1050px */
-@media (max-width: 1050px) {
-    /* .header {
-        height: 38vw;
-    } */
-
-    .header-contents {
-        max-width: 55%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .header-contents button:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+  }
+  
+  @keyframes slideIn {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
     }
-
-    .header-contents h2 {
-        font-size: max(4vw, 20px);
+    100% {
+      transform: translateX(0);
+      opacity: 1;
     }
-
-    .header-contents button {
-        padding: 1.5vw 3vw;
-        font-size: max(1.2vw, 12px);
-    }
-}
-
-/* Адаптивность для устройств с шириной экрана до 750px */
-@media (max-width: 750px) {
+  }
+  
+  @media (max-width: 768px) {
     .header {
-        height: 45vw;
-        background-size: cover;
-        margin: 15px auto;
+      height: 35vh; /* Уменьшил высоту для мобильных устройств */
     }
-
+  
     .header-contents {
-        max-width: 65%;
-        bottom: 15%;
+      max-width: 70%;
+      bottom: 15%;
     }
-
+  
     .header-contents h2 {
-        font-size: max(3.5vw, 18px);
+      font-size: 1.5rem; /* Уменьшил размер шрифта для мобильных устройств */
     }
-
+  
     .header-contents p {
-        display: none; /* Скрыть текст на маленьких экранах */
+      font-size: 0.9rem; /* Уменьшил размер шрифта для мобильных устройств */
     }
-
+  
     .header-contents button {
-        padding: 2vw 4vw;
-        font-size: max(1.5vw, 14px);
+      padding: 8px 16px; /* Уменьшил padding для мобильных устройств */
+      font-size: 0.8rem; /* Уменьшил размер шрифта для мобильных устройств */
     }
-}
-
-/* Адаптивность для устройств с шириной экрана до 500px */
-@media (max-width: 500px) {
+  }
+  
+  @media (max-width: 500px) {
     .header {
-        height: 50vw;
+      height: 30vh; /* Ещё больше уменьшил высоту для маленьких экранов */
     }
-
+  
     .header-contents {
-        max-width: 75%;
-        bottom: 20%;
+      max-width: 80%;
+      bottom: 20%;
     }
-
+  
     .header-contents h2 {
-        font-size: max(3vw, 16px);
+      font-size: 1.2rem; /* Уменьшил размер шрифта для маленьких экранов */
     }
-
+  
+    .header-contents p {
+      display: none; /* Скрыл текст на маленьких экранах */
+    }
+  
     .header-contents button {
-        padding: 2.5vw 5vw;
-        font-size: max(2vw, 12px);
+      padding: 6px 12px; /* Уменьшил padding для маленьких экранов */
+      font-size: 0.7rem; /* Уменьшил размер шрифта для маленьких экранов */
     }
-}
-
-/* Адаптивность для устройств с шириной экрана до 400px */
-@media (max-width: 400px) {
-    .header {
-        height: 60vw;
-    }
-
-    .header-contents {
-        max-width: 85%;
-        bottom: 25%;
-    }
-
-    .header-contents h2 {
-        font-size: max(2.5vw, 14px);
-    }
-
-    .header-contents button {
-        padding: 3vw 6vw;
-        font-size: max(2.5vw, 12px);
-    }
-}
+  }

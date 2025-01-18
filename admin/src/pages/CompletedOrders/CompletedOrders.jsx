@@ -8,11 +8,16 @@ const CompletedOrders = ({ url }) => {
   const [completedOrders, setCompletedOrders] = useState([]);
 
   const fetchCompletedOrders = async () => {
-    const response = await axios.get(`${url}/api/order/completed`);
-    if (response.data.success) {
-      setCompletedOrders(response.data.data);
-    } else {
-      toast.error("Error fetching completed orders");
+    try {
+      const response = await axios.get(`${url}/api/order/completed`);
+      if (response.data.success) {
+        setCompletedOrders(response.data.data);
+      } else {
+        toast.error("Ошибка при загрузке завершенных заказов");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("Ошибка при загрузке завершенных заказов");
     }
   };
 
@@ -22,7 +27,7 @@ const CompletedOrders = ({ url }) => {
 
   return (
     <div className="completed-orders add">
-      <h3>Completed Orders</h3>
+      <h3>Завершенные заказы</h3>
       <div className="completed-order-list">
         {completedOrders.map((order, index) => (
           <div key={index} className="completed-order-item">
@@ -37,29 +42,27 @@ const CompletedOrders = ({ url }) => {
                   }
                 })}
               </p>
-              <p className="completed-order-item-name">
-                {order.address.firstName + " " + order.address.lastName}
-              </p>
+              <p className="completed-order-item-name">{order.address.fullName}</p>
               <div className="completed-order-item-address">
-                <p>{order.address.street + ","}</p>
+                <p>{order.address.street + ", " + order.address.house}</p>
+                <p>{order.address.city + ", " + order.address.apartment}</p>
                 <p>
-                  {order.address.city +
-                    ", " +
-                    order.address.state +
-                    ", " +
-                    order.address.country +
-                    ", " +
-                    order.address.zipcode}
+                  {order.address.entrance && `Подъезд: ${order.address.entrance}, `}
+                  {order.address.floor && `Этаж: ${order.address.floor}, `}
+                  {order.address.intercom && `Домофон: ${order.address.intercom}`}
                 </p>
               </div>
               <p className="completed-order-item-phone">{order.address.phone}</p>
               <p className="completed-order-item-payment">
-                Payment Method: {order.paymentMethod}
+                Способ оплаты: {order.paymentMethod}
+              </p>
+              <p className="completed-order-item-comment">
+                {order.address.comment && `Комментарий: ${order.address.comment}`}
               </p>
             </div>
-            <p>Items: {order.items.length}</p>
+            <p>Товаров: {order.items.length}</p>
             <p>{order.amount} ₽</p>
-            <p className="completed-status">Status: {order.status}</p>
+            <p className="completed-status">Статус: {order.status}</p>
           </div>
         ))}
       </div>

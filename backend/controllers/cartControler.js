@@ -79,5 +79,26 @@ const getCart = async (req, res) => {
     res.status(500).json({ success: false, message: "Error" });
   }
 };
+// Очистка корзины
+const clearCart = async (req, res) => {
+  try {
+    const token = req.headers.token;
+    if (!token) {
+      return res.status(401).json({ error: "Доступ запрещен" });
+    }
 
-export { addToCart, removeFromCart, getCart };
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await userModel.findById(decoded.id);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    await userModel.findByIdAndUpdate(decoded.id, { cartData: {} });
+    res.json({ success: true, message: "Cart cleared" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Error" });
+  }
+};
+
+export { addToCart, removeFromCart, getCart, clearCart };

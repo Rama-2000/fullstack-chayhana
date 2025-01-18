@@ -8,20 +8,20 @@ const Sidebar = () => {
     <div className='sidebar'>
       <div className="sidebar-options">
         <NavLink to="/add" className="sidebar-option">
-          <img src={assets.add_icon} alt="Add Items" />
-          <p>Add Items</p>
+          <img src={assets.add_icon} alt="Добавить товар" />
+          <p>Добавить товар</p>
         </NavLink>
         <NavLink to="/list" className="sidebar-option">
-          <img src={assets.order_icon} alt="List Items" />
-          <p>List Items</p>
+          <img src={assets.order_icon} alt="Список товаров" />
+          <p>Список товаров</p>
         </NavLink>
         <NavLink to="/orders" className="sidebar-option">
-          <img src={assets.order_icon} alt="Orders" />
-          <p>Orders</p>
+          <img src={assets.order_icon} alt="Заказы" />
+          <p>Заказы</p>
         </NavLink>
         <NavLink to="/completed-orders" className="sidebar-option">
-          <img src={assets.order_icon} alt="Completed Orders" />
-          <p>Completed Orders</p>
+          <img src={assets.order_icon} alt="Завершенные заказы" />
+          <p>Завершенные заказы</p>
         </NavLink>
       </div>
     </div>

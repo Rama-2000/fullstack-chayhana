@@ -51,11 +51,11 @@ const Add = ({ url }) => {
     <div className="add">
       <form className="flex-col" onSubmit={onSubmitHandler}>
         <div className="add-image-upload flex-col">
-          <p>Upload image</p>
+          <p>Загрузить изображение</p>
           <label htmlFor="image">
             <img
               src={image ? URL.createObjectURL(image) : assets.upload_area}
-              alt="Upload"
+              alt="Загрузить"
             />
           </label>
           <input
@@ -67,44 +67,44 @@ const Add = ({ url }) => {
           />
         </div>
         <div className="add-product-name flex-col">
-          <p>Product Name</p>
+          <p>Название товара</p>
           <input
             onChange={onChangeHandler}
             value={data.name}
             type="text"
             name="name"
-            placeholder="type here"
+            placeholder="Введите название"
           />
         </div>
         <div className="add-product-description flex-col">
-          <p>Product description</p>
+          <p>Описание товара</p>
           <textarea
             onChange={onChangeHandler}
             value={data.description}
             name="description"
             rows="6"
-            placeholder="Write content here"
+            placeholder="Введите описание"
             required
           ></textarea>
         </div>
         <div className="add-category-price">
           <div className="add-category flex-col">
-            <p>Категория продукта</p>
+            <p>Категория товара</p>
             <select onChange={onChangeHandler} name="category">
               <option value="Салаты">Салаты</option>
               <option value="Горячие закуски">Горячие закуски</option>
-              <option value="Дисерты">Дисерты</option>
+              <option value="Десерты">Десерты</option>
               <option value="Напитки">Напитки</option>
               <option value="Супы">Супы</option>
               <option value="Холодные закуски">Холодные закуски</option>
-              <option value="Гарньеры">Гарньеры</option>
+              <option value="Гарниры">Гарниры</option>
               <option value="Мангал">Мангал</option>
-              <option value="Японская Кухня">Японская Кухня</option>
+              <option value="Японская кухня">Японская кухня</option>
               <option value="Фаст Фуд">Фаст Фуд</option>
             </select>
           </div>
           <div className="add-price flex-col">
-            <p>Product Price</p>
+            <p>Цена товара</p>
             <input
               onChange={onChangeHandler}
               value={data.price}
@@ -115,7 +115,7 @@ const Add = ({ url }) => {
           </div>
         </div>
         <button type="submit" className="add-btn">
-          Add
+          Добавить
         </button>
       </form>
     </div>

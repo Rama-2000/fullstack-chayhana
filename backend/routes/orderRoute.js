@@ -8,6 +8,7 @@ orderRouter.post("/place", authMiddleware, placeOrder); // Используем 
 orderRouter.post("/userorders", authMiddleware, userOrders); // Используем middleware для проверки токена
 orderRouter.get("/list", listOrders);
 orderRouter.post("/status", updateStatus);
-orderRouter.get("/completed", getCompletedOrders);
+orderRouter.get("/completed", getCompletedOrders); // Добавляем маршрут
+
 
 export default orderRouter;

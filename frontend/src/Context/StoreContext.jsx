@@ -7,6 +7,7 @@ const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState("");
   const [foodList, setFoodList] = useState([]);
+  const [user, setUser] = useState(null); // Добавляем состояние для пользователя
   const url = "http://localhost:4000";
 
   // Восстановление корзины из localStorage
@@ -20,39 +21,39 @@ const StoreContextProvider = (props) => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // Восстановление токена из cookies при загрузке страницы
+  // Восстановление токена и данных пользователя при загрузке страницы
   useEffect(() => {
-    const fetchToken = async () => {
+    const fetchTokenAndUser = async () => {
       try {
         const response = await axios.get(`${url}/api/user/check-auth`, {
-          withCredentials: true, // Убедитесь, что куки передаются
+          withCredentials: true,
         });
   
         if (response.data.success) {
-          setToken(response.data.token); // Восстанавливаем токен
-          console.log("Token restored:", response.data.token);
+          setToken(response.data.token); // Устанавливаем токен
+          setUser(response.data.user); // Устанавливаем данные пользователя
         }
       } catch (error) {
         console.error("Ошибка при проверке авторизации:", error);
       }
     };
-
-    fetchToken();
+  
+    fetchTokenAndUser();
   }, []);
 
   // Добавление товара в корзину
   const addToCart = async (itemId) => {
     const updatedCart = { ...cartItems, [itemId]: (cartItems[itemId] || 0) + 1 };
     setCartItems(updatedCart);
-  
+
     if (token) {
       try {
         await axios.post(
           `${url}/api/cart/add`,
           { itemId },
           {
-            headers: { token }, // Передаем токен в заголовке
-            withCredentials: true, // Убедитесь, что куки передаются
+            headers: { token },
+            withCredentials: true,
           }
         );
       } catch (error) {
@@ -60,25 +61,47 @@ const StoreContextProvider = (props) => {
       }
     }
   };
-  
+
+  // Удаление товара из корзины
   const removeFromCart = async (itemId) => {
     if (cartItems[itemId] > 0) {
       const updatedCart = { ...cartItems, [itemId]: cartItems[itemId] - 1 };
       setCartItems(updatedCart);
-  
+
       if (token) {
         try {
           await axios.post(
             `${url}/api/cart/remove`,
             { itemId },
             {
-              headers: { token }, // Передаем токен в заголовке
-              withCredentials: true, // Убедитесь, что куки передаются
+              headers: { token },
+              withCredentials: true,
             }
           );
         } catch (error) {
           console.error("Error removing from cart:", error);
         }
+      }
+    }
+  };
+
+  // Очистка корзины
+  const clearCart = async () => {
+    setCartItems({});
+    localStorage.removeItem("cart");
+
+    if (token) {
+      try {
+        await axios.post(
+          `${url}/api/cart/clear`,
+          {},
+          {
+            headers: { token },
+            withCredentials: true,
+          }
+        );
+      } catch (error) {
+        console.error("Error clearing cart:", error);
       }
     }
   };
@@ -120,9 +143,11 @@ const StoreContextProvider = (props) => {
     addToCart,
     removeFromCart,
     getTotalCartAmount,
+    clearCart,
     url,
     token,
     setToken,
+    user, // Передаем данные пользователя в контекст
   };
 
   return (
@@ -132,4 +157,4 @@ const StoreContextProvider = (props) => {
   );
 };
 
-export default StoreContextProvider
+export default StoreContextProvider;

@@ -1,35 +1,102 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-*{
+:root {
+  --primary-color: #3b82f6;
+  --primary-hover: #2563eb;
+  --background-light: #f9fafb;
+  --background-dark: #1f2937;
+  --text-light: #1f2937;
+  --text-dark: #f9fafb;
+  --border-light: #e5e7eb;
+  --border-dark: #374151;
+  --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-dark: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family:Outfit;
+  font-family: 'Inter', sans-serif;
 }
-body{
+
+body {
   min-height: 100vh;
+  background-color: var(--background-light);
+  color: var(--text-light);
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
-a{
+
+body.dark {
+  background-color: var(--background-dark);
+  color: var(--text-dark);
+}
+
+a {
   text-decoration: none;
   color: inherit;
 }
-li{
+
+li {
   cursor: pointer;
 }
-.app{
-  width: 80%;
+
+.app {
+  width: 90%;
+  max-width: 1200px;
   margin: auto;
 }
-@media(max-width:600px){
-  .app{
-    width: 90%;
-  }
-}
-@keyframes fadeIn{
-  0%{
+
+
+@keyframes fadeIn {
+  0% {
     opacity: 0;
   }
-  100%{
+  100% {
     opacity: 1;
   }
+}
+
+/* Глобальные стили для кнопок */
+button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Глобальные стили для инпутов */
+input {
+  padding: 10px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+body.dark input {
+  border-color: var(--border-dark);
+}
+
+body.dark input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
 }

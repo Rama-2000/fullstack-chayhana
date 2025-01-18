@@ -109,6 +109,9 @@
 
 /* Адаптивность для устройств с шириной экрана до 500px */
 @media (max-width: 500px) {
+    .explore-menu{
+        padding: 5px;
+    }
     .explore-menu h1 {
         font-size: max(4vw, 18px);
     }
@@ -120,6 +123,8 @@
 
     .explore-menu-list {
         gap: 10px;
+        margin: 0;
+
     }
 
     .explore-menu-list-item {

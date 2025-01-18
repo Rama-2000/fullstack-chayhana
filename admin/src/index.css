@@ -1,32 +1,63 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-*{
+:root {
+    --primary-color: #4CAF50; /* Зеленый для акцентов */
+    --secondary-color: #FF6F61; /* Оранжевый для кнопок и выделений */
+    --background-color: #f8f9fa; /* Светлый фон */
+    --text-color: #333; /* Основной цвет текста */
+    --border-color: #e0e0e0; /* Цвет границ */
+    --hover-color: #45a049; /* Цвет при наведении */
+  }
+  
+  [data-theme="dark"] {
+    --primary-color: #4CAF50;
+    --secondary-color: #FF6F61;
+    --background-color: #1e1e1e; /* Темный фон */
+    --text-color: #f8f9fa; /* Светлый текст */
+    --border-color: #444; /* Темные границы */
+    --hover-color: #45a049;
+  }
+  
+  * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: Outfit;
-}
-
-body{
+    font-family: 'Outfit', sans-serif;
+  }
+  
+  body {
     min-height: 100vh;
-    background-color: #fcfcfc;
-}
-a{
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  a {
     text-decoration: none;
     color: inherit;
-}
-hr{
+  }
+  
+  hr {
     border: none;
     height: 1px;
-    background-color:#a9a9a9;
-}
-.app-content{
+    background-color: var(--border-color);
+  }
+  
+  .app-content {
     display: flex;
-}
-.flex-col{
+    flex-direction: column;
+  }
+  
+  @media (min-width: 768px) {
+    .app-content {
+      flex-direction: row;
+    }
+  }
+  
+  .flex-col {
     display: flex;
     flex-direction: column;
     gap: 10px;
-}
-.cursor{
+  }
+  
+  .cursor {
     cursor: pointer;
-}
+  }

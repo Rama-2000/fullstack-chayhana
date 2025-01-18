@@ -1,18 +1,25 @@
-.verify{
+.verify {
     min-height: 60vh;
-    display: grid;
-}
-.verify .spinner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .verify .spinner {
     width: 100px;
     height: 100px;
-    place-self: center;
-    border: 5px solid #bdbdbd;
-    border-top-color: tomato;
+    border: 5px solid var(--border-light);
+    border-top-color: var(--primary-color);
     border-radius: 50%;
     animation: rotate 1s infinite;
-}
-@keyframes rotate{
-    100%{
-        transform: rotate(360deg);
+  }
+  
+  body.dark .verify .spinner {
+    border-color: var(--border-dark);
+  }
+  
+  @keyframes rotate {
+    100% {
+      transform: rotate(360deg);
     }
-}
+  }

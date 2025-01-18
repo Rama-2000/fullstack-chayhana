@@ -25,13 +25,13 @@ const Navbar = ({ setShowLogin }) => {
     <div className="navbar">
       <Link to="/" className="logo-main">
         <img src={assets.logo} alt="Logo" className="logo" />
-        <h3>Chayhana №1 Sultan</h3>
+        <h3>Чайхана №1 Султан</h3>
       </Link>
       <div className="navbar-right">
         <div className="phone-number">
           <a href="tel:+79231300808">
             <img src={assets.phoneIcon} alt="Phone" />
-            +7 (923) 130-08-08
+            <span className="phone-text">+7 (923) 130-08-08</span>
           </a>
         </div>
         <div className="navbar-search-icon">

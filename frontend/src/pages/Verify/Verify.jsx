@@ -20,7 +20,7 @@ const Verify = () => {
         navigate("/");
       }
     } catch (error) {
-      console.error("Error during API call:", error);
+      console.error("Ошибка при вызове API:", error);
       navigate("/");
     }
   };

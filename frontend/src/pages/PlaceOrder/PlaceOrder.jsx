@@ -5,18 +5,20 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const PlaceOrder = () => {
-  const { getTotalCartAmount, token, foodList, cartItems, url } = useContext(StoreContext);
+  const { getTotalCartAmount, token, foodList, cartItems, url, clearCart, user } = useContext(StoreContext);
   const [data, setData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    street: "",
-    city: "",
-    state: "",
-    zipcode: "",
-    country: "",
-    phone: "",
+    fullName: "", // Имя и Фамилия
+    city: "", // Город
+    street: "", // Улица
+    house: "", // Дом
+    entrance: "", // Подъезд
+    apartment: "", // Кв/офис
+    floor: "", // Этаж
+    intercom: "", // Домофон
+    comment: "", // Комментарий к заказу
+    phone: user?.phone || "", // Номер телефона с начальным значением
   });
+
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const navigate = useNavigate();
 
@@ -27,43 +29,44 @@ const PlaceOrder = () => {
 
   const placeOrder = async (event) => {
     event.preventDefault();
-  
+
     if (!token) {
-      alert("Please log in to place an order.");
+      alert("Пожалуйста, войдите, чтобы оформить заказ.");
       return;
     }
-  
+
     const orderItems = foodList
       .filter((item) => cartItems[item._id] > 0)
       .map((item) => ({
         ...item,
         quantity: cartItems[item._id],
       }));
-  
+
     const orderData = {
       address: data,
       items: orderItems,
       amount: getTotalCartAmount() + 2,
       paymentMethod,
     };
-  
+
     try {
       const response = await axios.post(
         `${url}/api/order/place`,
         orderData,
         {
-          headers: { token }, // Передаем токен в заголовке
-          withCredentials: true, // Убедитесь, что куки передаются
+          headers: { token },
+          withCredentials: true,
         }
       );
-  
+
       if (response.data.success) {
-        alert("Order placed successfully!");
+        clearCart(); // Очищаем корзину после успешного оформления заказа
+        alert("Заказ успешно оформлен!");
         navigate("/myorders");
       }
     } catch (error) {
-      console.error("Error:", error.response ? error.response.data : error.message);
-      alert("Error placing order. Please try again.");
+      console.error("Ошибка:", error.response ? error.response.data : error.message);
+      alert("Ошибка при оформлении заказа. Пожалуйста, попробуйте снова.");
     }
   };
 
@@ -78,39 +81,103 @@ const PlaceOrder = () => {
   return (
     <form onSubmit={placeOrder} className="place-order">
       <div className="place-order-left">
-        <p className="title">Delivery Info</p>
+        <p className="title">Информация о доставке</p>
+        <input
+          required
+          name="fullName"
+          onChange={onChangeHandler}
+          value={data.fullName}
+          type="text"
+          placeholder="Имя и Фамилия"
+        />
+        <input
+          required
+          name="city"
+          onChange={onChangeHandler}
+          value={data.city}
+          type="text"
+          placeholder="Город"
+        />
+        <input
+          required
+          name="street"
+          onChange={onChangeHandler}
+          value={data.street}
+          type="text"
+          placeholder="Улица"
+        />
         <div className="multi-fields">
-          <input required name="firstName" onChange={onChangeHandler} value={data.firstName} type="text" placeholder="First name" />
-          <input required name="lastName" onChange={onChangeHandler} value={data.lastName} type="text" placeholder="Last name" />
+          <input
+            required
+            name="house"
+            onChange={onChangeHandler}
+            value={data.house}
+            type="text"
+            placeholder="Дом"
+          />
+          <input
+            name="entrance"
+            onChange={onChangeHandler}
+            value={data.entrance}
+            type="text"
+            placeholder="Подъезд"
+          />
         </div>
-        <input required name="email" onChange={onChangeHandler} value={data.email} type="email" placeholder="Email address" />
-        <input required name="street" onChange={onChangeHandler} value={data.street} type="text" placeholder="Street" />
         <div className="multi-fields">
-          <input required name="city" onChange={onChangeHandler} value={data.city} type="text" placeholder="City" />
-          <input required name="state" onChange={onChangeHandler} value={data.state} type="text" placeholder="State" />
+          <input
+            name="apartment"
+            onChange={onChangeHandler}
+            value={data.apartment}
+            type="text"
+            placeholder="Кв/офис"
+          />
+          <input
+            name="floor"
+            onChange={onChangeHandler}
+            value={data.floor}
+            type="text"
+            placeholder="Этаж"
+          />
         </div>
-        <div className="multi-fields">
-          <input required name="zipcode" onChange={onChangeHandler} value={data.zipcode} type="text" placeholder="Zip code" />
-          <input required name="country" onChange={onChangeHandler} value={data.country} type="text" placeholder="Country" />
-        </div>
-        <input required name="phone" onChange={onChangeHandler} value={data.phone} type="text" placeholder="Phone" />
+        <input
+          name="intercom"
+          onChange={onChangeHandler}
+          value={data.intercom}
+          type="text"
+          placeholder="Домофон"
+        />
+        <input
+          name="comment"
+          onChange={onChangeHandler}
+          value={data.comment}
+          type="text"
+          placeholder="Комментарий к заказу"
+        />
+        <input
+          required
+          name="phone"
+          onChange={onChangeHandler}
+          value={data.phone}
+          type="text"
+          placeholder="Номер телефона"
+        />
       </div>
       <div className="place-order-right">
         <div className="cart-total">
-          <h2>Cart Total</h2>
+          <h2>Итого в корзине</h2>
           <div>
             <div className="cart-total-detailes">
-              <p>Subtotal</p>
+              <p>Подитог</p>
               <p>{getTotalCartAmount()} ₽</p>
             </div>
             <hr />
             <div className="cart-total-detailes">
-              <p>Delivery Fee</p>
+              <p>Стоимость доставки</p>
               <p>{getTotalCartAmount() === 0 ? 0 : 2} ₽</p>
             </div>
             <hr />
             <div className="cart-total-detailes">
-              <b>Total</b>
+              <b>Общая сумма</b>
               <b>{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2} ₽</b>
             </div>
           </div>
@@ -123,7 +190,7 @@ const PlaceOrder = () => {
                 checked={paymentMethod === "cash"}
                 onChange={() => setPaymentMethod("cash")}
               />
-              Cash on Delivery
+              Оплата при получении
             </label>
             <label>
               <input
@@ -133,10 +200,10 @@ const PlaceOrder = () => {
                 checked={paymentMethod === "card"}
                 onChange={() => setPaymentMethod("card")}
               />
-              Pay with Card (Not Online)
+              Оплата картой (не онлайн)
             </label>
           </div>
-          <button type="submit">Place Order</button>
+          <button type="submit">Оформить заказ</button>
         </div>
       </div>
     </form>

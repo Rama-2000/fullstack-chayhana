@@ -152,7 +152,6 @@ const checkAuth = async (req, res) => {
   if (!token) {
     return res.status(401).json({ success: false, message: "Не авторизован" });
   }
-
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await userModel.findById(decoded.id);
@@ -160,15 +159,30 @@ const checkAuth = async (req, res) => {
       return res.status(404).json({ success: false, message: "Пользователь не найден" });
     }
 
-    res.json({ success: true, token });
+    res.json({ success: true, token, user }); // Возвращаем данные пользователя
   } catch (error) {
     res.status(401).json({ success: false, message: "Неверный токен" });
   }
 };
 
 // Выход пользователя
-const logoutUser = (req, res) => {
+// Выход пользователя
+const logoutUser = async (req, res) => {
   try {
+    const token = req.cookies.token;
+    if (!token) {
+      return res.status(401).json({ success: false, message: "Не авторизован" });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await userModel.findById(decoded.id);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "Пользователь не найден" });
+    }
+
+    // Очищаем корзину пользователя
+    await userModel.findByIdAndUpdate(decoded.id, { cartData: {} });
+
     // Удаляем токен из куки
     res.clearCookie("token", {
       httpOnly: true,

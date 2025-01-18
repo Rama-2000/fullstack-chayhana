@@ -1,33 +1,61 @@
-.sidebar{
-    width: 18%;
-    min-height: 100vh;
-    border: 1.5px solid #a9a9a9;
-    border-top: 0;
-    font-size: max(1vw, 10px);
-}
-.sidebar-options{
-    padding-top: 50px;
-    padding-left: 20px;
+.sidebar {
+    width: 100%;
+    min-height: auto;
+    background-color: var(--background-color);
+    border-bottom: 1px solid var(--border-color);
+    font-size: max(1vw, 12px);
+    padding: 10px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .sidebar-options {
+    display: flex;
     gap: 15px;
-}
-.sidebar-option{
+    padding: 10px;
+    overflow-x: auto; /* Добавляем горизонтальную прокрутку, если элементы не помещаются */
+  }
+  
+  .sidebar-option {
     display: flex;
     align-items: center;
-    gap: 12px;
-    border: 1px solid #a9a9a9;
-    border-right: 0;
-    padding: 8px 10px;
-    border-radius: 3px 0 0 3px;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
     cursor: pointer;
-}
-.sidebar-option.active{
-    background-color: #fff0ed;
-    border-color: tomato;
-}
-@media(max-width:900px){
-    .sidebar p{
-        display: none;
+    color: var(--text-color);
+    transition: background-color 0.2s ease;
+    white-space: nowrap; /* Текст не переносится на новую строку */
+  }
+  
+  .sidebar-option:hover {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  .sidebar-option.active {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  @media (min-width: 768px) {
+    .sidebar {
+      width: 18%;
+      min-height: 100vh;
+      border-right: 1px solid var(--border-color);
+      border-bottom: none;
+      padding: 20px;
+      display: block;
     }
-}
+  
+    .sidebar-options {
+      flex-direction: column;
+      padding-top: 30px;
+      overflow-x: visible;
+    }
+  
+    .sidebar-option {
+      gap: 12px;
+      padding: 10px 15px;
+    }
+  }
