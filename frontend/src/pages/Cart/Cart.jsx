@@ -62,7 +62,7 @@ const Cart = () => {
             <hr />
             <div className="cart-total-detailes">
               <b>Общая сумма</b>
-              <b>{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 300} ₽</b>
+              <b>{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 400} ₽</b>
             </div>
           </div>
           <button onClick={() => navigate("/order")}>Оформить заказ</button>

@@ -173,12 +173,12 @@ const PlaceOrder = () => {
             <hr />
             <div className="cart-total-detailes">
               <p>Стоимость доставки</p>
-              <p>{getTotalCartAmount() === 0 ? 0 : 2} ₽</p>
+              <p>{getTotalCartAmount() === 0 ? 0 : 400} ₽</p>
             </div>
             <hr />
             <div className="cart-total-detailes">
               <b>Общая сумма</b>
-              <b>{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2} ₽</b>
+              <b>{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 400} ₽</b>
             </div>
           </div>
           <div className="payment-method">
