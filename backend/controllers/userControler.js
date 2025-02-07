@@ -1,6 +1,6 @@
 import userModel from "../models/userModel.js";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
+const bcrypt = require('bcryptjs')
 import validator from "validator";
 
 // Генерация токена
