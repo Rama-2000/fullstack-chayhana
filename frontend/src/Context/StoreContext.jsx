@@ -8,7 +8,7 @@ const StoreContextProvider = (props) => {
   const [token, setToken] = useState("");
   const [foodList, setFoodList] = useState([]);
   const [user, setUser] = useState(null); // Добавляем состояние для пользователя
-  const url = "http://localhost:4000";
+  const url = "https://fullstack-chayhana.onrender.com";
 
   // Восстановление корзины из localStorage
   useEffect(() => {
