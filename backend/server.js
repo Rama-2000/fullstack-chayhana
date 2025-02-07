@@ -17,7 +17,7 @@ app.use(express.json()); // Для обработки JSON-запросов
 app.use(cookieParser()); // Для работы с cookies
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:5174", "https://frontend-chayhana.onrender.com"], // Разрешаем запросы с указанных доменов
+    origin: ["http://localhost:5173", "http://localhost:5174", "https://frontend-chayhana.onrender.com", "https://front-admin-chayhana.onrender.com/"], // Разрешаем запросы с указанных доменов
     credentials: true, // Разрешаем передачу cookies
   })
 );
